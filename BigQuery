@@ -1,4 +1,4 @@
-The Query:
+The query I code I used to fetch the data source from BigQuery for the dashboard:
 
 1. NYCITYBIKE_by.date
 SELECT
