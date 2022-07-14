@@ -1,0 +1,67 @@
+The Query:
+
+1. NYCITYBIKE_by.date
+SELECT
+  CAST(starttime AS date) AS date,
+  COUNT(*) AS num_trips,
+  ROUND(SUM(tripduration/60),2) AS total_duration_minutes,
+  COUNT(DISTINCT bikeid) AS num_bikes
+FROM
+  `bigquery-public-data.new_york_citibike.citibike_trips`
+WHERE
+  starttime IS NOT NULL
+GROUP BY
+  date
+ORDER BY
+  date
+  
+  2. ny_city_bike_by.bikeid
+  SELECT
+  bikeid,
+  CAST(starttime AS date) AS date,
+  COUNT(*) AS num_trips,
+  ROUND(SUM(tripduration/60),2) AS total_trip_duration_minutes
+FROM
+  `bigquery-public-data.new_york_citibike.citibike_trips`
+WHERE
+  starttime IS NOT NULL
+GROUP BY
+  date,
+  bikeid
+
+3. ny_city_bike_by.gender 
+SELECT
+  CAST(starttime AS date) AS date,
+  usertype,
+  gender,
+  COUNT(*) AS num_trips,
+  ROUND(SUM(tripduration/60),2) AS total_trip_duration_minutes
+FROM
+  `bigquery-public-data.new_york_citibike.citibike_trips`
+WHERE
+  starttime IS NOT NULL
+GROUP BY
+  date,
+  usertype,
+  gender
+ORDER BY
+  date,
+  usertype,
+  gender
+  
+  4. ny_city_bike_by.station
+  SELECT
+  CAST(starttime AS date) AS date,
+  start_station_name,
+  COUNT(*) AS num_trips,
+  COUNT(DISTINCT bikeid) AS num_bikes,
+  ROUND(SUM(tripduration/60),2) AS total_trip_duration_minutes
+FROM
+  `bigquery-public-data.new_york_citibike.citibike_trips`
+WHERE
+  starttime IS NOT NULL
+GROUP BY
+  date,
+  start_station_name
+ORDER BY
+  date
